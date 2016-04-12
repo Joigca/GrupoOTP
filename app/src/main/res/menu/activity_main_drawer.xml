@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/inicioCuadricula"
+            android:icon="@drawable/home"
+            android:title="@string/inicio"/>
+        <item android:id="@+id/conocenos"
+            android:icon="@drawable/meet"
+            android:title="@string/conocenos"/>
+        <item android:id="@+id/encuentranos"
+            android:icon="@drawable/encuentranos"
+            android:title="@string/encuentranos"/>
+        <item android:id="@+id/descargas"
+            android:icon="@drawable/meet"
+            android:title="@string/descargas"/>
+        <item android:id="@+id/coordinacion"
+            android:icon="@drawable/find"
+            android:title="@string/coordinacion"/>
+        <item android:id="@+id/examenSalud"
+            android:icon="@drawable/exsalud"
+            android:title="@string/examenSalud"/>
+        <item android:id="@+id/areaClientesPrevinet"
+            android:icon="@drawable/area_clients"
+            android:title="@string/areaPrevinet"/>
+    </group>
+    <item android:title="@string/informacion">
+        <menu>
+            <group android:checkableBehavior="single">
+                <!--
+                <item android:id="@+id/preferencias"
+                    android:icon="@drawable/pref"
+                    android:title="@string/preferencias"/>
+                    -->
+                <item android:id="@+id/avisoLegal"
+                    android:icon="@drawable/pref"
+                    android:title="@string/avisoLegal"/>
+            </group>
+        </menu>
+    </item>
+</menu>

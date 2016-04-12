@@ -1,0 +1,40 @@
+<resources>
+
+    <string name="app_name">Grupo OTP</string>
+
+    <!-- General -->
+    <string name="aceptar">Aceptar</string>
+    <string name="denegar">Denegar</string>
+    <string name="buscar">Buscar</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
+    <string name="leerMas">Leer Más ></string>
+
+    <!-- Navigation Drawer -->
+    <string name="navigation_drawer_open">Abierto</string>
+    <string name="navigation_drawer_close">Cerrado</string>
+
+    <!-- navigationDrawer -->
+    <string name="inicio">Inicio</string>
+    <string name="conocenos">Conocenos</string>
+    <string name="encuentranos">Encuentranos</string>
+    <string name="coordinacion">Coordinación</string>
+    <string name="descargas">Descargas</string>
+    <string name="examenSalud">Examen de Salud</string>
+    <string name="areaPrevinet">Area Clientes Previnet</string>
+    <string name="informacion">Información</string>
+    <string name="preferencias">Preferencias</string>
+    <string name="avisoLegal">Aviso Legal</string>
+
+    <!-- ENCUENTRANOS -->
+    <string name="activarGPS">El GPS está desactivado ¿Desea activarlo?</string>
+    <string name="listaOficinas">Listado Oficinas</string>
+    <string name="mapa">Mapa</string>
+    <string name="buscador">Buscador</string>
+
+    <!-- INICIO -->
+    <string name="carga">Cargando las noticias...</string>
+    <string name="conexionI">Usted no tiene conexión a internet,</string>
+    <string name="conexionII">conectese a una red disponible</string>
+
+</resources>

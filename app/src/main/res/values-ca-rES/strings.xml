@@ -1,0 +1,35 @@
+<resources>
+
+    <string name="app_name">Grupo OTP</string>
+
+    <!-- General -->
+    <string name="aceptar">Aceptar</string>
+    <string name="denegar">Denegar</string>
+    <string name="buscar">Buscar</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
+    <string name="leerMas">Llegir Més ></string>
+
+    <!-- Navigation Drawer -->
+    <string name="navigation_drawer_open">Abierto</string>
+    <string name="navigation_drawer_close">Cerrado</string>
+
+    <!-- navigationDrawer -->
+    <string name="inicio">Inici</string>
+    <string name="conocenos">Sobre Nosaltres</string>
+    <string name="encuentranos">Troba-nos</string>
+    <string name="coordinacion">Coordinació</string>
+    <string name="descargas">Descàrregues</string>
+    <string name="examenSalud">Examen de Salut</string>
+    <string name="areaPrevinet">Area Clients Previnet</string>
+    <string name="informacion">informació</string>
+    <string name="preferencias">Preferències</string>
+    <string name="avisoLegal">Avís Legal</string>
+
+    <!-- ENCUENTRANOS -->
+    <string name="activarGPS">El GPS és impossibilitat agradaria activar-lo?</string>
+    <string name="listaOficinas">Llistat dOficina </string>
+    <string name="mapa">Mapa</string>
+    <string name="buscador">Motor de Cerca</string>
+
+</resources>

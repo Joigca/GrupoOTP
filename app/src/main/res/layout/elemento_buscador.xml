@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="NomCentro"
+        android:id="@+id/txtNomBuscador"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="5dp"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Direccion"
+        android:id="@+id/txtDireccionBuscador"
+        android:layout_below="@+id/txtNomBuscador"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#000000"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Ubicacion"
+        android:id="@+id/txtUbicacionBuscador"
+        android:layout_below="@+id/txtDireccionBuscador"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:layout_marginBottom="15dp" />
+
+</RelativeLayout>
