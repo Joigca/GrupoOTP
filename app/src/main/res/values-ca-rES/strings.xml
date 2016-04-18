@@ -31,5 +31,11 @@
     <string name="listaOficinas">Llistat dOficina </string>
     <string name="mapa">Mapa</string>
     <string name="buscador">Motor de Cerca</string>
+    <string name="mensajeUbicacion">Grup OTP necessita la seva ubicació per oferir més informació sobre els centres</string>
+
+    <!-- INICIO -->
+    <string name="carga">Carregant les notícies...</string>
+    <string name="conexionI">Vostè no té connexió a Internet,</string>
+    <string name="conexionII">connecteu-vos a una xarxa disponible</string>
 
 </resources>

@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    tools:context=".MainActivity">
+    android:background="#ffffff">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,19 +15,54 @@
         <ImageSwitcher
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/imageSwitcher" />
+            android:id="@+id/imageSwitcher" >
+
+        </ImageSwitcher>
 
     </RelativeLayout>
 
     <GridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:horizontalSpacing="5dp"
         android:verticalSpacing="5dp"
         android:layout_margin="5dp"
         android:layout_below="@+id/relativeLayout1">
     </GridView>
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/relativeLayout1"
+        android:id="@+id/siguiente"
+        android:layout_alignParentEnd="true"
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="25dp"
+        android:textColor="#000000"
+        android:layout_marginRight="15dp"
+        android:layout_alignTop="@+id/relativeLayout1"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="70dp"
+        android:background="#99FFFFFF"
+        android:text=">" />
+
+    <Button
+        android:id="@+id/anterior"
+        android:layout_height="30dp"
+        android:layout_width="30dp"
+        android:layout_above="@+id/gridView"
+        android:layout_alignParentStart="true"
+        android:textSize="25dp"
+        android:textColor="#000000"
+        android:layout_marginLeft="15dp"
+        android:background="#99FFFFFF"
+        android:text="&lt;"
+        android:layout_marginBottom="70dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_alignTop="@+id/relativeLayout1"
+        android:layout_marginTop="70dp"
+        android:layout_alignParentEnd="false" />
 
 
 </RelativeLayout>

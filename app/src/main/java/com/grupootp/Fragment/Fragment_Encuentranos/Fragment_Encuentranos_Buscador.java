@@ -116,13 +116,6 @@ public class Fragment_Encuentranos_Buscador extends Fragment {
             showGPSDisabledAlertToUser();
         }
 
-        /* Use the LocationManager class to obtain GPS locations */
-        LocationManager mlocManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-        MyLocationListener mlocListener = new MyLocationListener();
-        mlocListener.setMainActivity(this);
-        mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener) mlocListener);
-
-
         Log.d("Identificador", ""+getId());
 
         barraBuscar = (SearchView) view.findViewById(R.id.sbBuscador);
@@ -152,6 +145,33 @@ public class Fragment_Encuentranos_Buscador extends Fragment {
         db.insertarCentros();
         rellenarLista(db.consultarCentros());
         addMarkers(db.consultarCentros());
+
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+            mapBuscador.setMyLocationEnabled(true);
+            mapBuscador.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+                @Override
+                public boolean onMyLocationButtonClick() {
+
+                    if (!isGPSEnabled()) {
+                        showGPSDisabledAlertToUser();
+                    }
+
+                    return false;
+                }
+            });
+
+            /* Use the LocationManager class to obtain GPS locations */
+            LocationManager mlocManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+            MyLocationListener mlocListener = new MyLocationListener();
+            mlocListener.setMainActivity(this);
+            mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener) mlocListener);
+        }else{
+
+            explicarUsoPermiso();
+            solicitarPermiso();
+
+        }
 
         barraBuscar.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -246,29 +266,6 @@ public class Fragment_Encuentranos_Buscador extends Fragment {
                 getActivity().startActivity(mostrarOficina);
             }
         });
-
-
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-
-            mapBuscador.setMyLocationEnabled(true);
-            mapBuscador.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
-                @Override
-                public boolean onMyLocationButtonClick() {
-
-                    if (!isGPSEnabled()) {
-                        showGPSDisabledAlertToUser();
-                    }
-
-                    return false;
-                }
-            });
-
-        }else {
-
-            explicarUsoPermiso();
-            solicitarPermiso();
-
-        }
 
 
 
@@ -510,7 +507,7 @@ public class Fragment_Encuentranos_Buscador extends Fragment {
         //Comprobamos si el usuario ha marcado "No volver a preguntar"
         if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)){
 
-            Toast.makeText(getActivity(), "Explicamos el porque necesitamos los permisos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.mensajeUbicacion, Toast.LENGTH_SHORT).show();
 
         }
 

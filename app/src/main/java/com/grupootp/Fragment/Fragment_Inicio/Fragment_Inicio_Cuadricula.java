@@ -60,6 +60,7 @@ public class Fragment_Inicio_Cuadricula extends Fragment {
     View view;
     private Boolean variable;
     private AlertDialog alertDialog;
+    private TextView anterior, siguiente;
 
     private int[] gallery ={ R.drawable.slide_hospital, R.drawable.slide_master, R.drawable.slide_simulador};
 
@@ -74,20 +75,46 @@ public class Fragment_Inicio_Cuadricula extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_inicio_cuadricula, container, false);
 
+        anterior = (TextView) view.findViewById(R.id.anterior);
+        anterior.setText("<");
+
+        anterior.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Toast.makeText(getActivity(), "Has pulsado Anterior", Toast.LENGTH_SHORT).show();
+
+/*
+                    if (position + 1 <= gallery.length){
+                        position = 0;
+                    }else {
+                        position += 1;
+                    }
+
+                    ResizeImage image = new ResizeImage();
+                    Drawable img = getResources().getDrawable(gallery[position]);
+                    imageSwitcher.setBackground(image.resize(img, punto.y, punto.x - punto.x / 8));
+
+                    Log.d("mensaje", position+"");
+*/
+                }
+            });
+
+        siguiente = (TextView) view.findViewById(R.id.siguiente);
+        siguiente.setText(">");
+
+        siguiente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Has pulsado Siguiente", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         variable = false;
         ocultarTeclado();
         pantalla = getActivity().getWindowManager().getDefaultDisplay();
         punto = new Point();
         pantalla.getSize(punto);
-
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-        builder.setTitle(R.string.informacion)
-                .setMessage(R.string.carga);
-        alertDialog = builder.create();
-
-        alertDialog.show();
 
         gridView = (GridView) view.findViewById(R.id.gridView);
         gridView.setNumColumns(2);
@@ -165,6 +192,16 @@ public class Fragment_Inicio_Cuadricula extends Fragment {
      * starts or restarts the slider
      */
 
+    public void dialogAlert(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setTitle(R.string.informacion)
+                .setMessage(R.string.carga);
+        alertDialog = builder.create();
+
+        alertDialog.show();
+    }
+
     public boolean isOnline(){
 
         //Comprobamos que el dispositivo tiene conexion a Internet
@@ -220,45 +257,49 @@ public class Fragment_Inicio_Cuadricula extends Fragment {
                                 stop();
                             }
 
-                            Drawable myIcon = getResources().getDrawable(gallery[position]);
-                            ResizeImage image = new ResizeImage();
-
-                            //imageSwitcher.setImageDrawable(image.resize(myIcon, 2 * punto.y + punto.x / 2, 2 * punto.x));
-                            //imageSwitcher.setImageDrawable(myIcon);
-
-                            int medi = punto.x - punto.x / 8;
-                            Picasso.with(getActivity()).load(gallery[position]).resize(punto.y, punto.x - punto.x / 8).into(new Target() {
-                                @Override
-                                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-
-                                    Drawable img = new BitmapDrawable(getResources(), bitmap);
-                                    imageSwitcher.setImageDrawable(img);
-                                    alertDialog.dismiss();
-
-                                }
-
-                                @Override
-                                public void onBitmapFailed(Drawable errorDrawable) {
-
-                                }
-
-                                @Override
-                                public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-                                }
-                            });
-
-                            position++;
-
-                            if (position == gallery.length) {
-                                position = 0;
-                            }
-
+                            cambioImagen();
                         }
                     });
                 }
             }
         }, 0, DURATION);
+    }
+
+    public void cambioImagen(){
+
+        if (position == gallery.length) {
+            position = 0;
+        }
+
+        Drawable myIcon = getResources().getDrawable(gallery[position]);
+        ResizeImage image = new ResizeImage();
+
+        //imageSwitcher.setImageDrawable(image.resize(myIcon, 2 * punto.y + punto.x / 2, 2 * punto.x));
+        //imageSwitcher.setImageDrawable(myIcon);
+
+        int medi = punto.x - punto.x / 8;
+        Picasso.with(getActivity()).load(gallery[position]).resize(punto.y, punto.x - punto.x / 8).into(new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+
+                Drawable img = new BitmapDrawable(getResources(), bitmap);
+                imageSwitcher.setImageDrawable(img);
+                position++;
+                alertDialog.dismiss();
+
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+            }
+        });
+
     }
 
     // Stops the slider when the Activity is going into the background
@@ -276,25 +317,20 @@ public class Fragment_Inicio_Cuadricula extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        dialogAlert();
         variable = false;
         if (timer != null) {
             startSlider();
         }
-
-        //Log.d("variable en resume", variable.toString());
-
     }
 
     @Override
     public void onDestroy() {
-        //Toast.makeText(getContext(), "Totalemte fuera", Toast.LENGTH_SHORT).show();
         super.onDestroy();
         variable = true;
         if (timer == null){
             stop();
         }
-
-        //Log.d("variable en destroy", variable.toString());
     }
 
     public void ventanaCarga(){
@@ -302,7 +338,6 @@ public class Fragment_Inicio_Cuadricula extends Fragment {
     }
 
     public void rellenarLista(ArrayList<Noticias> array){
-        //Log.d("DATOS", "Dentro de rellenar Lista");
         gridView.setAdapter(new Adaptador(getActivity(), R.layout.elemento_blog_cuadricula, array) {
             @Override
             public void onEntrada(Object object, View v) {
@@ -316,12 +351,8 @@ public class Fragment_Inicio_Cuadricula extends Fragment {
 
                     if (txtTituloBlog != null)
                         txtTituloBlog.setText(((Noticias) object).getTitulo());
-                    //Log.d("DATOS", "Entrada --> " + ((Noticias) object).getTitulo());
-                    //if (txtDescripcionBlog != null)
-                    //    txtDescripcionBlog.setText(((Noticias) object).getDesc());
 
                     Boolean pred = ((Noticias) object).getImgPred();
-                    //Log.d("PRED", pred.toString());
 
                     if (((Noticias) object).getImgPred() == true) {
                         Resources res = getResources();
@@ -336,7 +367,6 @@ public class Fragment_Inicio_Cuadricula extends Fragment {
                         Log.d("TAMANYO", "x-- "+size.x+", y-- "+size.y);
 
                         relativeLayout.setBackground(image.resize(draw, size.x, 120));
-                        //layout.setBackground(image.resize(draw, size.x, 120));
 
                     }
                     if (!((Noticias) object).getImgPred()) {
@@ -679,8 +709,16 @@ public class Fragment_Inicio_Cuadricula extends Fragment {
                 Point size = new Point();
                 display.getSize(size);
 
-                Drawable d = new BitmapDrawable(getResources(), bitmap);
-                layout.setBackground(image.resize(d, size.x, 150));
+                if (bitmap != null){
+                    Drawable d = new BitmapDrawable(getResources(), bitmap);
+                    layout.setBackground(image.resize(d, size.x, 150));
+
+                }else {
+
+                    Drawable d = getResources().getDrawable(R.drawable.imgsalud);
+                    layout.setBackground(image.resize(d, size.x, 150));
+
+                }
 
             }
         }
